@@ -1,0 +1,22 @@
+<h2>Edit Restaurant: <%= @restaurant.name %></h2>
+
+<% if @restaurant.errors.any? %>
+<p>Oh boy, this is embarrassing... Looks like we have a problem.</p>
+<ul>
+  <% @restaurant.errors.full_messages.each do |error| %>
+  <li class='error'><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<p>Enter restaurant details:</p>
+<form method="POST" action="/restaurants/<%=@restaurant.id%>">
+  <input type="hidden" value="put" name="_method">
+  <input type="text" name="restaurant[name]" value="<%= @restaurant.name %>" />
+  <input type="text" name="restaurant[cuisine]" value="<%= @restaurant.cuisine %>" />
+  <input type="text" name="restaurant[address]" value="<%= @restaurant.address %>" />
+  <input type="text" name="restaurant[city]" value="<%= @restaurant.city %>" />
+  <input type="text" name="restaurant[state]" value="<%= @restaurant.state %>" />
+  <input type="text" name="restaurant[zip_code]" value="<%= @restaurant.zip_code %>" />
+  <input type="submit" value="Save Changes to Restaurant" />
+</form>

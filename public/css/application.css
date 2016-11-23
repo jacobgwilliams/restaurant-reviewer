@@ -1,0 +1,40 @@
+.error {
+  color: red;
+}
+
+nav > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav > ul > li {
+  display: inline-block;
+}
+
+.listing {
+  background-color: lightgrey;
+  width: 300px;
+  border: 25px solid green;
+  padding: 25px;
+  margin: 25px;
+  display: inline-block;
+}
+
+.review_form {
+  background-color: goldenrod;
+  width: 300px;
+  border: 25px limegreen;
+  padding: 25px;
+  margin: 25px;
+  float: right;
+}
+
+.review_section {
+  background-color: goldenrod;
+  width: 300px;
+  border: 25px limegreen;
+  padding: 25px;
+  margin: 25px;
+  float: left;
+}

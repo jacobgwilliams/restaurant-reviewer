@@ -1,0 +1,62 @@
+<h1><%= @restaurant.name %></h1>
+<p>Address: <%=@restaurant.full_address %></p>
+<p>Cuisine: <%=@restaurant.cuisine %></p>
+<em>Restaurant added by <%= @creator.username %> on <%=@restaurant.created_at.strftime("%m/%d/%Y at %I:%M%p") %></em>
+
+<% if logged_in? && @restaurant.creator_id == current_user.id %>
+<hr>
+<a href="/restaurants/<%=@restaurant.id%>/edit">Edit Restaurant</a> |
+<form method="post" action="/restaurants/<%= @restaurant.id %>">
+  <input type="hidden" value="delete" name="_method">
+  <input type="submit" value="Delete Restaurant">
+</form>
+<% end %>
+
+<br>
+
+<div class="review_section">
+<h2>Reviews</h2>
+  <% if @restaurant.reviews.any? %>
+<p>Average Rating: <%= @restaurant.average_rating %></p>
+<ul>
+    <%@restaurant.reviews.each do |review| %>
+    <li><%= review.review %> - <em><%= review.author.username %></em> at <%=review.created_at.strftime("%m/%d/%Y at %I:%M%p") %> </li>
+    <% end %>
+  <% else %>
+    <p>Ain't no reviews yet!</p>
+  <% end %>
+</ul>
+</div>
+
+<div class="review_form">
+  <h2>Leave a Review</h2>
+<% if @review && @review.errors.any? %>
+  <strong>No bueno!</strong>
+  <ul>
+    <% @review.errors.full_messages.each do |error| %>
+    <li class='error'><%= error %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <% if logged_in? %>
+    <% if @ya_did_it && @ya_did_it == true %>
+    <p>Thanks for your review!</p>
+    <% elsif @reviewed == true %>
+    <p>You have already reviewed this. <a href="/">Review some others!</a></p>
+    <% else %>
+    <form method="POST" action="/restaurants/<%=@restaurant.id%>/reviews">
+      <textarea name="review[review]"></textarea><br>
+      <select name="review[rating]" type="select">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+      </select>
+      <input type="submit" value="Leave Review">
+    </form>
+    <% end %>
+  <% else %>
+  <p>You must be logged in to leave a review</p>
+  <% end %>
+</div>

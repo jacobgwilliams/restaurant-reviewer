@@ -1,0 +1,17 @@
+<h2>New User Registration</h2>
+
+<% if @user.errors.any? %>
+<p>Oh boy, this is embarrassing... Looks like we have a problem.</p>
+<ul>
+  <% @user.errors.full_messages.each do |error| %>
+  <li class='error'><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<form method="POST" action="/users">
+  <input type="text" name="user[email]" placeholder="email" />
+  <input type="text" name="user[username]" placeholder="username" />
+  <input type="password" name="user[password]" placeholder="password" />
+  <input type="submit" value="Register!">
+</form>

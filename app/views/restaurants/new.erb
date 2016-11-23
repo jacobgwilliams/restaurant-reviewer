@@ -1,0 +1,21 @@
+<h2>New Restaurant</h2>
+
+<% if @restaurant.errors.any? %>
+<p>Oh boy, this is embarrassing... Looks like we have a problem.</p>
+<ul>
+  <% @restaurant.errors.full_messages.each do |error| %>
+  <li class='error'><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<p>Enter restaurant details:</p>
+<form method="POST" action="/restaurants">
+  <input type="text" name="restaurant[name]" placeholder="name" />
+  <input type="text" name="restaurant[cuisine]" placeholder="cuisine" />
+  <input type="text" name="restaurant[address]" placeholder="street address" />
+  <input type="text" name="restaurant[city]" placeholder="city" />
+  <input type="text" name="restaurant[state]" placeholder="state (2 letters)" />
+  <input type="text" name="restaurant[zip_code]" placeholder="zip code (5 digit)" />
+  <input type="submit" value="Save Restaurant" />
+</form>
